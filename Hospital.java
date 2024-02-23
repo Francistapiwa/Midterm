@@ -4,11 +4,30 @@
  */
 
 /**
- *
  * @author stavi
+ * 
  */
+
+import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import midterm.PatientForm;
+
+@SuppressWarnings("ObsoleteAnnotationSupportedSource")
 public class Hospital extends javax.swing.JFrame {
 
+    private PopupMenu popupMenu1;
+    private JLabel HosptialLabel;
+    private JLabel UsernameLabel;
+    private JTextField UsernameTextField1;
+    private JLabel jLabel2;
+    private JPasswordField UsernamePasswordField1;
+    private JButton LoginButton1;
+    private JCheckBox PatientCheckBox1;
+    private JCheckBox DoctorCheckBox1;
+    private JCheckBox jCheckBox1;
+    private JPopupMenu jPopupMenu1;
+    private JPopupMenu jPopupMenu2;
     /**
      * Creates new form Hospital
      */
@@ -96,7 +115,7 @@ public class Hospital extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(DoctorCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addComponent(jCheckBox1)
                         .addGap(62, 62, 62)
                         .addComponent(PatientCheckBox1)
@@ -148,7 +167,7 @@ public class Hospital extends javax.swing.JFrame {
     }//GEN-LAST:event_UsernameTextField1ActionPerformed
 
     private void UsernamePasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernamePasswordField1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_UsernamePasswordField1ActionPerformed
 
     private void DoctorCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorCheckBox1ActionPerformed
@@ -157,61 +176,53 @@ public class Hospital extends javax.swing.JFrame {
 
     private void LoginButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButton1ActionPerformed
         // TODO add your handling code here:
-         public String authenticateUser() 
-        // Your authentication logic here
-        boolean authenticated = true;
+    String username = UsernameTextField1.getText();
+    String password = new String(UsernamePasswordField1.getPassword());
 
-        if (authenticated) {
-            // Your navigation logic here
-            String role = "user";
-            return switch (role) {
-                case "admin" -> "admin/dashboard?faces-redirect=true";
-                case "user" -> "user/profile?faces-redirect=true";
-                default -> "home?faces-redirect=true";
-            };
-        } else {
-            return "login?faces-redirect=true";
-        }
+    if (PatientCheckBox1.isSelected()) {
+        // Open Patient Form
+        openPatientForm(username, password);
+    } else if (DoctorCheckBox1.isSelected()) {
+        // Open Doctor Form
+        openDoctorForm(username, password);
+    } else if (jCheckBox1.isSelected()) {
+        // Open Admin Form (replace "AdminForm" with the actual form class)
+        openAdminForm(username, password);
+    } else {
+        // Handle the case when no checkbox is selected
+        JOptionPane.showMessageDialog(this, "Please select a login option.");
+    }
+}
+
+private void openPatientForm(String username, String password) {
+    // Assuming PatientForm is a valid class
+    PatientForm patientForm = new PatientForm(username, password);
+    patientForm.setVisible(true);
+    this.dispose(); // Close the current login form if needed
+}
+
+private void openDoctorForm(String username, String password) {
+    // Assuming DoctorForm is a valid class
+    DoctorForm doctorForm = new DoctorForm(username, password);
+    doctorForm.setVisible(true);
+    this.dispose(); // Close the current login form if needed
+}
+
+private void openAdminForm(String username, String password) {
+    // Assuming AdminForm is a valid class
+    AdminForm adminForm = new AdminForm (username, password);
+    adminForm.setVisible(true);
+    this.dispose(); // Close the current login form if needed
+} 
+
+
+
     }//GEN-LAST:event_LoginButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
+{
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Hospital().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox DoctorCheckBox1;
@@ -227,4 +238,3 @@ public class Hospital extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
-}
